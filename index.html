@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Farmer Burundi - AI-Powered Agriculture Platform</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌱</text></svg>">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="#home" class="logo">
+                <i class="fas fa-leaf"></i>
+                <span>Smart Farmer Burundi</span>
+            </a>
+            
+            <div class="nav-links" id="navLinks">
+                <a href="#home" class="active">Home</a>
+                <a href="#features">Features</a>
+                <a href="#detection">Crop Detection</a>
+                <a href="#marketplace">Marketplace</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+                <div class="auth-buttons">
+                    <button id="loginBtn" class="btn btn-outline">Login</button>
+                    <button id="registerBtn" class="btn btn-primary">Sign Up</button>
+                </div>
+            </div>
+            
+            <button class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>AI-Powered Agriculture for Burundi Farmers</h1>
+                    <p class="subtitle">Detect crop diseases, get soil recommendations, and connect with buyers — all with Kirundi language support.</p>
+                    <div class="hero-buttons">
+                        <button id="getStartedBtn" class="btn btn-primary btn-lg">
+                            <i class="fas fa-play"></i> Get Started Free
+                        </button>
+                        <button id="watchDemoBtn" class="btn btn-outline btn-lg">
+                            <i class="fas fa-video"></i> Watch Demo
+                        </button>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="stat">
+                            <span class="number" data-count="5000">0</span>
+                            <span class="label">Farmers Helped</span>
+                        </div>
+                        <div class="stat">
+                            <span class="number" data-count="98">0</span>
+                            <span class="label">Accuracy Rate</span>
+                        </div>
+                        <div class="stat">
+                            <span class="number">24/7</span>
+                            <span class="label">Support</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="hero-img-placeholder">
+                        <i class="fas fa-tractor"></i>
+                        <i class="fas fa-seedling"></i>
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="features">
+            <div class="container">
+                <h2 class="section-title">Why Choose Smart Farmer?</h2>
+                <p class="section-subtitle">Everything you need to succeed in modern agriculture</p>
+                
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <h3>AI Crop Detection</h3>
+                        <p>Upload crop photos to instantly detect diseases with AI. Get advice in Kirundi even with low confidence.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-seedling"></i>
+                        </div>
+                        <h3>Soil Recommendations</h3>
+                        <p>Personalized soil advice based on crop type, soil condition, and season for optimal yields.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-store"></i>
+                        </div>
+                        <h3>Marketplace</h3>
+                        <p>Buy and sell crops directly. Connect with buyers and farmers across Burundi.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <h3>Real-time Chat</h3>
+                        <p>Secure messaging between farmers and buyers. Negotiate prices and arrange deliveries.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3>Analytics Dashboard</h3>
+                        <p>Track your farm performance, predictions history, and marketplace activity.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-language"></i>
+                        </div>
+                        <h3>Kirundi Support</h3>
+                        <p>Full Kirundi language interface. All advice and recommendations in your native language.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Crop Detection Section -->
+        <section id="detection" class="crop-detection">
+            <div class="container">
+                <h2 class="section-title">AI Crop Health Detection</h2>
+                <p class="section-subtitle">Upload a photo of your crop and get instant analysis</p>
+                
+                <div class="detection-container">
+                    <div class="upload-area" id="uploadArea">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <h3>Drag & Drop or Click to Upload</h3>
+                        <p>Upload a clear photo of your crop leaves (JPG, PNG, max 10MB)</p>
+                        <input type="file" id="cropImage" accept="image/*" hidden>
+                        <button class="btn btn-primary" id="selectImageBtn">
+                            <i class="fas fa-camera"></i> Select Image
+                        </button>
+                        <div class="image-preview" id="imagePreview"></div>
+                    </div>
+                    
+                    <div class="detection-controls">
+                        <div class="form-group">
+                            <label for="cropType"><i class="fas fa-leaf"></i> Crop Type</label>
+                            <select id="cropType" class="form-control">
+                                <option value="">Select Crop Type</option>
+                                <option value="maize">Maize (Ibigori)</option>
+                                <option value="rice">Rice (Umuceri)</option>
+                                <option value="beans">Beans (Ibishyimbo)</option>
+                                <option value="potato">Potato (Ibirayi)</option>
+                                <option value="banana">Banana (Ibitoke)</option>
+                                <option value="cassava">Cassava (Imyumbati)</option>
+                            </select>
+                        </div>
+                        
+                        <button class="btn btn-primary btn-block" id="analyzeBtn" disabled>
+                            <i class="fas fa-magic"></i> Analyze Crop Health
+                        </button>
+                        
+                        <div class="confidence-info">
+                            <h4><i class="fas fa-info-circle"></i> How Confidence Works</h4>
+                            <div class="confidence-levels">
+                                <div class="level">
+                                    <span class="dot high"></span>
+                                    <span>80-100%: Detailed Recommendation</span>
+                                </div>
+                                <div class="level">
+                                    <span class="dot medium"></span>
+                                    <span>50-79%: Monitor & Retake Photo</span>
+                                </div>
+                                <div class="level">
+                                    <span class="dot low"></span>
+                                    <span>Below 50%: Basic Guidance</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="results-area" id="resultsArea">
+                        <div class="results-header">
+                            <h3><i class="fas fa-clipboard-check"></i> Analysis Results</h3>
+                            <div class="confidence-badge" id="confidenceBadge">
+                                <span class="confidence-score">--%</span>
+                                <span>Confidence</span>
+                            </div>
+                        </div>
+                        
+                        <div class="result-card" id="resultCard">
+                            <div class="result-icon">
+                                <i class="fas fa-question-circle"></i>
+                            </div>
+                            <div class="result-content">
+                                <h4 id="resultTitle">Waiting for Analysis</h4>
+                                <p id="resultAdvice">Upload a crop photo and select crop type to begin analysis.</p>
+                                <div class="soil-recommendation" id="soilRecommendation">
+                                    <h5><i class="fas fa-seedling"></i> Soil Recommendation</h5>
+                                    <p id="soilAdvice">Soil advice will appear here after analysis.</p>
+                                </div>
+                                <div class="treatment-plan" id="treatmentPlan">
+                                    <h5><i class="fas fa-pills"></i> Treatment Plan</h5>
+                                    <ul id="treatmentList"></ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="action-buttons">
+                            <button class="btn btn-outline" id="saveResultBtn" disabled>
+                                <i class="fas fa-save"></i> Save to Profile
+                            </button>
+                            <button class="btn btn-primary" id="newAnalysisBtn">
+                                <i class="fas fa-redo"></i> New Analysis
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Marketplace Section -->
+        <section id="marketplace" class="marketplace">
+            <div class="container">
+                <h2 class="section-title">Crop Marketplace</h2>
+                <p class="section-subtitle">Buy and sell crops directly with other farmers</p>
+                
+                <div class="marketplace-tabs">
+                    <button class="tab-btn active" data-tab="buy">Buy Crops</button>
+                    <button class="tab-btn" data-tab="sell">Sell Crops</button>
+                    <button class="tab-btn" data-tab="chat">Messages</button>
+                </div>
+                
+                <div class="tab-content active" id="buyTab">
+                    <div class="marketplace-filters">
+                        <input type="text" placeholder="Search crops..." class="search-input" id="searchInput">
+                        <select class="filter-select" id="cropFilter">
+                            <option value="">All Crops</option>
+                            <option value="maize">Maize</option>
+                            <option value="rice">Rice</option>
+                            <option value="beans">Beans</option>
+                            <option value="potato">Potato</option>
+                        </select>
+                        <select class="filter-select" id="locationFilter">
+                            <option value="">All Regions</option>
+                            <option value="bujumbura">Bujumbura</option>
+                            <option value="gitega">Gitega</option>
+                            <option value="ngozi">Ngozi</option>
+                        </select>
+                    </div>
+                    
+                    <div class="products-grid" id="productsGrid">
+                        <!-- Products loaded dynamically -->
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="sellTab">
+                    <div class="sell-form">
+                        <h3><i class="fas fa-plus-circle"></i> List Your Crop for Sale</h3>
+                        <form id="sellForm">
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label>Crop Name</label>
+                                    <input type="text" placeholder="e.g., Maize" id="sellCropName" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Quantity (kg)</label>
+                                    <input type="number" placeholder="e.g., 100" id="sellQuantity" required min="1">
+                                </div>
+                                <div class="form-group">
+                                    <label>Price per kg (BIF)</label>
+                                    <input type="number" placeholder="e.g., 1500" id="sellPrice" required min="1">
+                                </div>
+                                <div class="form-group">
+                                    <label>Location</label>
+                                    <input type="text" placeholder="e.g., Bujumbura" id="sellLocation" required>
+                                </div>
+                                <div class="form-group full-width">
+                                    <label>Description</label>
+                                    <textarea placeholder="Describe your crop quality, harvest date, etc." id="sellDescription" rows="3"></textarea>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-upload"></i> List for Sale
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="chatTab">
+                    <div class="chat-container">
+                        <div class="chat-sidebar">
+                            <h4>Recent Conversations</h4>
+                            <div class="conversation-list" id="conversationList">
+                                <!-- Conversations loaded dynamically -->
+                            </div>
+                        </div>
+                        <div class="chat-main">
+                            <div class="chat-header" id="chatHeader">
+                                <h4>Select a conversation</h4>
+                            </div>
+                            <div class="chat-messages" id="chatMessages">
+                                <!-- Messages will be loaded here -->
+                            </div>
+                            <div class="chat-input">
+                                <input type="text" placeholder="Type your message..." id="chatInput" disabled>
+                                <button class="btn btn-primary" id="sendMessageBtn" disabled>
+                                    <i class="fas fa-paper-plane"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about">
+            <div class="container">
+                <h2 class="section-title">About Smart Farmer Burundi</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <h3>Empowering Farmers with AI Technology</h3>
+                        <p>Smart Farmer Burundi is an innovative platform designed to help farmers in Burundi improve crop yields, detect diseases early, and connect directly with buyers.</p>
+                        <p>Our AI-powered system analyzes crop photos and provides instant recommendations in Kirundi, making advanced agricultural technology accessible to all farmers.</p>
+                        <div class="mission-stats">
+                            <div class="mission-stat">
+                                <i class="fas fa-bullseye"></i>
+                                <h4>Our Mission</h4>
+                                <p>To increase agricultural productivity and farmer income through technology.</p>
+                            </div>
+                            <div class="mission-stat">
+                                <i class="fas fa-eye"></i>
+                                <h4>Our Vision</h4>
+                                <p>A future where every farmer in Burundi has access to smart farming tools.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="about-image">
+                        <div class="about-img-placeholder">
+                            <i class="fas fa-hands-helping"></i>
+                            <i class="fas fa-globe-africa"></i>
+                            <i class="fas fa-users"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact">
+            <div class="container">
+                <h2 class="section-title">Contact Us</h2>
+                <p class="section-subtitle">Get in touch with our support team</p>
+                
+                <div class="contact-container">
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <h4>Location</h4>
+                                <p>Bujumbura, Burundi</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <h4>Phone Number</h4>
+                                <p>+257 123 456 789</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <h4>Email Address</h4>
+                                <p>info@smartfarmer.bi</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <h4>Working Hours</h4>
+                                <p>Monday - Friday: 8:00 - 17:00</p>
+                                <p>Saturday: 9:00 - 13:00</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-form">
+                        <h3>Send us a Message</h3>
+                        <form id="contactForm">
+                            <div class="form-group">
+                                <input type="text" placeholder="Your Name" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" placeholder="Your Email" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" placeholder="Subject" required>
+                            </div>
+                            <div class="form-group">
+                                <textarea placeholder="Your Message" rows="5" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-paper-plane"></i> Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Authentication Modals -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2><i class="fas fa-sign-in-alt"></i> Login</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label>Email or Phone</label>
+                    <input type="text" placeholder="Enter email or phone" id="loginEmail" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" placeholder="Enter password" id="loginPassword" required>
+                </div>
+                <div class="form-options">
+                    <label class="checkbox">
+                        <input type="checkbox" id="rememberMe"> Remember me
+                    </label>
+                    <a href="#" class="forgot-password">Forgot password?</a>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Login</button>
+                <div class="auth-divider">
+                    <span>or continue with</span>
+                </div>
+                <div class="social-auth">
+                    <button type="button" class="btn btn-google">
+                        <i class="fab fa-google"></i> Google
+                    </button>
+                    <button type="button" class="btn btn-facebook">
+                        <i class="fab fa-facebook"></i> Facebook
+                    </button>
+                </div>
+                <p class="auth-switch">
+                    Don't have an account? <a href="#" id="switchToRegister">Sign up</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="registerModal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2><i class="fas fa-user-plus"></i> Create Account</h2>
+            <form id="registerForm">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" placeholder="Enter your full name" id="registerName" required>
+                </div>
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" placeholder="Enter email" id="registerEmail" required>
+                </div>
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="tel" placeholder="Enter phone number" id="registerPhone" required>
+                </div>
+                <div class="form-group">
+                    <label>User Type</label>
+                    <div class="user-type-selector">
+                        <label class="user-type-option">
+                            <input type="radio" name="userType" value="farmer" checked>
+                            <div class="option-content">
+                                <i class="fas fa-tractor"></i>
+                                <span>Farmer</span>
+                            </div>
+                        </label>
+                        <label class="user-type-option">
+                            <input type="radio" name="userType" value="buyer">
+                            <div class="option-content">
+                                <i class="fas fa-shopping-cart"></i>
+                                <span>Buyer</span>
+                            </div>
+                        </label>
+                        <label class="user-type-option">
+                            <input type="radio" name="userType" value="admin">
+                            <div class="option-content">
+                                <i class="fas fa-user-shield"></i>
+                                <span>Admin</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" placeholder="Create password" id="registerPassword" required minlength="6">
+                </div>
+                <div class="form-group">
+                    <label>Confirm Password</label>
+                    <input type="password" placeholder="Confirm password" id="registerConfirmPassword" required>
+                </div>
+                <div class="form-group">
+                    <label class="checkbox">
+                        <input type="checkbox" id="registerTerms" required>
+                        I agree to the <a href="#">Terms & Conditions</a>
+                    </label>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Create Account</button>
+                <p class="auth-switch">
+                    Already have an account? <a href="#" id="switchToLogin">Login</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>Smart Farmer Burundi</h3>
+                    <p>Empowering farmers with AI technology for better yields and sustainable agriculture.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <a href="#home">Home</a>
+                    <a href="#detection">Crop Detection</a>
+                    <a href="#marketplace">Marketplace</a>
+                    <a href="#features">Features</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Support</h4>
+                    <a href="#">Help Center</a>
+                    <a href="#">Contact Us</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Newsletter</h4>
+                    <p>Subscribe to get updates on new features</p>
+                    <div class="newsletter-form">
+                        <input type="email" placeholder="Your email">
+                        <button class="btn btn-primary">Subscribe</button>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Smart Farmer Burundi. All rights reserved.</p>
+                <p>Made with <i class="fas fa-heart"></i> for Burundi farmers</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Notification Container -->
+    <div id="notificationContainer"></div>
+
+    <!-- Load JavaScript -->
+    <script src="app.js"></script>
+</body>
+</html>
