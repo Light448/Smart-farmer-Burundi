@@ -3,7 +3,7 @@
 Smart Farmer Burundi is a static web application built with **HTML, CSS, and JavaScript** to support farmers with digital tools such as crop insights, marketplace features, and community interaction.
 
 ## 🚀 Live Demo
-👉 https://USERNAME.github.io/REPO_NAME/
+👉 https://Light448.github.io/Smart-farmer-Burundi/
 
 ## ✨ Features
 - Farmer-focused UI
