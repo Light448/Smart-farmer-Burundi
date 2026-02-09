@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { analyzeCropHealth } from '../services/geminiService';
 import { CropAnalysis, User } from '../types';
 import { TRANSLATIONS } from '../constants';
-import { Camera, Upload, AlertTriangle, CheckCircle, Loader2, Save } from 'lucide-react';
+import { getDiseaseGuide, getSeverityFromConfidence } from '../data/diseaseGuide';
+import { Camera, Upload, AlertTriangle, CheckCircle, Loader2, Save, AlertCircle } from 'lucide-react';
 
 interface Props {
   lang: 'en' | 'fr';
@@ -164,6 +165,68 @@ const CropDoctor: React.FC<Props> = ({ lang, user }) => {
                    <p className="text-yellow-800 whitespace-pre-line">{analysis.treatment}</p>
                 </div>
               )}
+
+              {/* Disease Treatment & Prevention Guide - shown when disease detected */}
+              {!analysis.healthy && (() => {
+                const guide = getDiseaseGuide(analysis.diseaseName ?? null);
+                const severity = getSeverityFromConfidence(analysis.confidence);
+                const isEn = lang === 'en';
+                return (
+                  <div className="space-y-4 pt-2 border-t border-gray-200">
+                    <h3 className="text-lg font-bold text-gray-900">{isEn ? 'Disease Treatment & Prevention Guide' : 'Guide traitement et prévention'}</h3>
+
+                    {/* Disease Alert Card */}
+                    <div className="bg-amber-50 rounded-xl p-4 border border-amber-200">
+                      <h4 className="font-bold text-amber-900 flex items-center gap-2 mb-2">🚨 {isEn ? 'Disease Alert' : 'Alerte maladie'}</h4>
+                      <ul className="text-sm text-amber-800 space-y-1">
+                        <li><span className="font-medium">🦠 {isEn ? 'Disease' : 'Maladie'}:</span> {analysis.diseaseName ?? (isEn ? 'Detected' : 'Détectée')}</li>
+                        <li><span className="font-medium">🌿 {isEn ? 'Crop' : 'Culture'}:</span> {isEn ? 'From image' : 'De l’image'}</li>
+                        <li><span className="font-medium">⚠️ {isEn ? 'Severity' : 'Gravité'}:</span> {severity}</li>
+                      </ul>
+                    </div>
+
+                    {/* Prevention Checklist */}
+                    <div className="bg-white rounded-xl p-4 border border-gray-200">
+                      <h4 className="font-bold text-gray-900 flex items-center gap-2 mb-3">🛡️ {isEn ? 'Prevention' : 'Prévention'}</h4>
+                      <ul className="space-y-2">
+                        {guide.prevention.map((item, i) => (
+                          <li key={i} className="flex items-start gap-2 text-sm text-gray-700">
+                            <span className="text-gray-400 mt-0.5">⬜</span> {item}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    {/* Organic Treatment (Primary) */}
+                    <div className="bg-green-50 rounded-xl p-4 border border-green-200">
+                      <h4 className="font-bold text-green-900 flex items-center gap-2 mb-2">🌿 {isEn ? 'Organic Treatment (Recommended first)' : 'Traitement biologique (recommandé en premier)'}</h4>
+                      <p className="font-medium text-green-800 text-sm">{guide.organic.name}</p>
+                      <p className="text-sm text-green-800 mt-1"><span className="font-medium">🧴 {isEn ? 'How to apply' : 'Application'}:</span> {guide.organic.howToApply}</p>
+                      <p className="text-sm text-green-800 mt-1"><span className="font-medium">🔁 {isEn ? 'Frequency' : 'Fréquence'}:</span> {guide.organic.frequency}</p>
+                    </div>
+
+                    {/* Chemical Treatment (Optional) */}
+                    {guide.chemical && (
+                      <div className="bg-slate-50 rounded-xl p-4 border border-slate-200">
+                        <h4 className="font-bold text-slate-900 flex items-center gap-2 mb-2">🧪 {isEn ? 'Chemical treatment (only if necessary)' : 'Traitement chimique (si nécessaire)'}</h4>
+                        <p className="text-sm text-slate-800"><span className="font-medium">{guide.chemical.name}</span></p>
+                        <p className="text-sm text-slate-800 mt-1"><span className="font-medium">📏 {isEn ? 'Dosage' : 'Dosage'}:</span> {guide.chemical.dosage}</p>
+                        <p className="text-sm text-slate-800 mt-1"><span className="font-medium">⏱️ {isEn ? 'Timing' : 'Moment'}:</span> {guide.chemical.timing}</p>
+                      </div>
+                    )}
+
+                    {/* Safety Notice */}
+                    <div className="bg-orange-50 rounded-xl p-4 border-2 border-orange-200">
+                      <h4 className="font-bold text-orange-900 flex items-center gap-2 mb-2"><AlertCircle size={18} /> ⚠️ {isEn ? 'Safety notice' : 'Avis de sécurité'}</h4>
+                      <ul className="text-sm text-orange-900 space-y-1">
+                        <li>🧤 {isEn ? 'Wear protective clothing' : 'Porter des vêtements de protection'}</li>
+                        <li>🚫 {isEn ? 'Keep children away' : 'Tenir les enfants à l’écart'}</li>
+                        <li>⏳ {isEn ? 'Respect wait time before harvest (see label)' : 'Respecter le délai avant récolte (voir étiquette)'}</li>
+                      </ul>
+                    </div>
+                  </div>
+                );
+              })()}
               
               <div className="text-center text-xs text-gray-500 flex items-center justify-center gap-1">
                  <Save size={12}/> {lang === 'en' ? 'Saved to profile' : 'Enregistré sur le profil'}

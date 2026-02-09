@@ -5,7 +5,7 @@ import { getCurrentUser, logout } from './services/authService';
 import { TRANSLATIONS } from './constants';
 import { 
   Leaf, ShoppingBag, BarChart3, Sprout, MessageCircle, 
-  Menu, X, LogOut, Phone, ShieldCheck, User as UserIcon 
+  Menu, X, LogOut, Phone, ShieldCheck, User as UserIcon, MapPin 
 } from 'lucide-react';
 
 // Pages
@@ -13,6 +13,7 @@ import Home from './pages/Home';
 import Auth from './pages/Auth';
 import CropDoctor from './pages/CropDoctor';
 import SoilAdvisor from './pages/SoilAdvisor';
+import CropRecommendation from './pages/CropRecommendation';
 import Marketplace from './pages/Marketplace';
 import Dashboard from './pages/Dashboard';
 import AdminDashboard from './pages/AdminDashboard';
@@ -26,6 +27,17 @@ const App: React.FC = () => {
   useEffect(() => {
     const u = getCurrentUser();
     setUser(u);
+  }, []);
+
+  // With HashRouter, the app route is in the hash (#/path). If someone opens
+  // http://localhost:3000/marketplace (no hash), redirect to #/marketplace so the right page loads.
+  useEffect(() => {
+    const path = window.location.pathname || '';
+    const hash = window.location.hash || '';
+    if (path.length > 1 && path !== '/' && !hash.startsWith('#/')) {
+      window.location.replace(window.location.origin + '/' + '#' + path + window.location.search);
+      return;
+    }
   }, []);
 
   const t = TRANSLATIONS[lang];
@@ -74,6 +86,7 @@ const App: React.FC = () => {
               <div className="hidden md:flex items-center space-x-4">
                 {user && <NavLink to="/crop-doctor" icon={ShieldCheck} label="AI Doctor" />}
                 {user && <NavLink to="/soil-advisor" icon={Sprout} label={t.soilAdvisor} />}
+                <NavLink to="/crop-recommendation" icon={MapPin} label={t.cropRecommendation} />
                 <NavLink to="/marketplace" icon={ShoppingBag} label={t.marketplace} />
                 
                 {user ? (
@@ -120,6 +133,7 @@ const App: React.FC = () => {
             <div className="md:hidden bg-white border-t px-2 pt-2 pb-3 space-y-1 sm:px-3">
               {user && <NavLink to="/crop-doctor" icon={ShieldCheck} label="AI Doctor" />}
               {user && <NavLink to="/soil-advisor" icon={Sprout} label={t.soilAdvisor} />}
+              <NavLink to="/crop-recommendation" icon={MapPin} label={t.cropRecommendation} />
               <NavLink to="/marketplace" icon={ShoppingBag} label={t.marketplace} />
               <NavLink to="/contact" icon={Phone} label={t.contact} />
               {user ? (
@@ -153,6 +167,7 @@ const App: React.FC = () => {
             <Route path="/auth" element={!user ? <Auth setUser={setUser} lang={lang} /> : <Navigate to="/dashboard" />} />
             <Route path="/contact" element={<Contact lang={lang} />} />
             <Route path="/marketplace" element={<Marketplace lang={lang} user={user} />} />
+            <Route path="/crop-recommendation" element={<CropRecommendation lang={lang} />} />
             
             {/* Protected Routes */}
             <Route path="/crop-doctor" element={user ? <CropDoctor lang={lang} user={user} /> : <Navigate to="/auth" />} />

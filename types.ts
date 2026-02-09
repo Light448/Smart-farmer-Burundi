@@ -35,6 +35,10 @@ export interface Product {
   category: string;
   imageUrl: string;
   description: string;
+  /** Province / Zone (Burundi). For marketplace card. */
+  provinceZone?: string;
+  /** Available yield in kg. For marketplace card. */
+  availableYieldKg?: number;
 }
 
 export interface SoilRecommendation {

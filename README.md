@@ -1,46 +1,63 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# 🌱 Smart Farmer Burundi
 
-# Run and deploy your AI Studio app
+AI-powered agriculture app for Burundi: crop doctor, soil advisor, crop recommendations by region, and farmer marketplace.
 
-This contains everything you need to run your app locally.
+## Run locally
 
-View your app in AI Studio: https://ai.studio/apps/drive/1l_to8OTqdvdGZQM0htPBhAQefbp-txut
+**Prerequisites:** Node.js
 
-## Run Locally
+1. Install dependencies: `npm install`
+2. Create `.env.local` and set your Gemini API key:
+   ```
+   GEMINI_API_KEY=your_key_here
+   ```
+3. Start the app: `npm run dev`  
+   Open http://localhost:3000
 
-**Prerequisites:**  Node.js
+## Push to GitHub
 
+Run these in **PowerShell** from the project folder:
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+```powershell
+cd C:\Users\user.DESKTOP-OMQ89VA\Downloads\smart-farmer-burundi
+git add .
+git status
+git commit -m "Smart Farmer Burundi - ready for deploy"
+git push origin main
+```
 
-## Deploy for free
+If the repo is new or you haven’t added the remote yet:
 
-The app is a static Vite build. You can host it for free on **Vercel** or **Netlify**.
+```powershell
+git remote add origin https://github.com/YOUR_USERNAME/smart-farmer-burundi.git
+git branch -M main
+git push -u origin main
+```
+
+Replace `YOUR_USERNAME` with your GitHub username.
+
+## Deploy for free (Vercel or Netlify)
+
+The app is a static Vite build. Host it for free on **Vercel** or **Netlify**.
 
 ### Option A: Vercel (recommended)
 
-1. Push your code to **GitHub** (create a repo and push).
+1. Push your code to GitHub (see above).
 2. Go to [vercel.com](https://vercel.com) and sign in with GitHub.
 3. Click **Add New** → **Project** and import your `smart-farmer-burundi` repo.
-4. Before deploying, open **Settings** → **Environment Variables** and add:
+4. Before or right after first deploy, go to **Settings** → **Environment Variables** and add:
    - **Name:** `GEMINI_API_KEY`
    - **Value:** your Gemini API key (same as in `.env.local`)
-5. Click **Deploy**. Vercel will run `npm run build` and host the `dist` folder. Your app will be live at a `*.vercel.app` URL.
+5. Click **Deploy**. Your app will be live at `https://your-project.vercel.app`.
 
 ### Option B: Netlify
 
-1. Push your code to **GitHub**.
+1. Push your code to GitHub.
 2. Go to [netlify.com](https://netlify.com) and sign in with GitHub.
 3. Click **Add new site** → **Import an existing project** and choose your repo.
-4. Build settings are pre-filled by `netlify.toml`. Under **Site settings** → **Environment variables** add:
+4. Build settings are in `netlify.toml`. In **Site settings** → **Environment variables** add:
    - **Key:** `GEMINI_API_KEY`
    - **Value:** your Gemini API key
-5. Click **Deploy site**. Your app will be live at a `*.netlify.app` URL.
+5. Click **Deploy site**. Your app will be at `https://something.netlify.app`.
 
-**Important:** Set `GEMINI_API_KEY` in the host’s environment variables so the built app can call the Gemini API. Don’t commit `.env.local` (it’s in `.gitignore`).
+**Important:** Set `GEMINI_API_KEY` on the host so the app can use the Gemini API. Do not commit `.env.local` (it’s in `.gitignore`).

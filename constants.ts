@@ -1,40 +1,10 @@
 import { Product } from "./types";
 
-export const MOCK_PRODUCTS: Product[] = [
-  {
-    id: '1',
-    sellerId: '2',
-    sellerName: 'Jean Pierre',
-    name: 'Fresh Tomatoes / Tomates Fraîches',
-    price: 1500,
-    currency: 'BIF',
-    category: 'Vegetables',
-    imageUrl: 'https://picsum.photos/id/102/400/300',
-    description: 'Organic tomatoes harvested this morning. High quality.'
-  },
-  {
-    id: '2',
-    sellerId: '2',
-    sellerName: 'Jean Pierre',
-    name: 'Maize / Maïs',
-    price: 800,
-    currency: 'BIF',
-    category: 'Grains',
-    imageUrl: 'https://picsum.photos/id/111/400/300',
-    description: 'Dried maize suitable for flour.'
-  },
-  {
-    id: '3',
-    sellerId: '99',
-    sellerName: 'Maria N.',
-    name: 'Coffee Beans / Café',
-    price: 5000,
-    currency: 'BIF',
-    category: 'Cash Crops',
-    imageUrl: 'https://picsum.photos/id/106/400/300',
-    description: 'Premium Arabica beans from Kayanza.'
-  }
-];
+/**
+ * Marketplace listings. ZERO AUTHORITY to create data — system must NEVER auto-add price, quantity, location, crop, or images.
+ * ALL listings must be created manually by the farmer. No demo listings, no sample data.
+ */
+export const MOCK_PRODUCTS: Product[] = [];
 
 export const TRANSLATIONS = {
   en: {
@@ -49,6 +19,7 @@ export const TRANSLATIONS = {
     treatment: "Recommended Treatment",
     marketplace: "Marketplace",
     soilAdvisor: "Soil Advisor",
+    cropRecommendation: "Crop by Region",
     contact: "Contact Us",
     login: "Login",
     logout: "Logout",
@@ -70,6 +41,7 @@ export const TRANSLATIONS = {
     treatment: "Traitement Recommandé",
     marketplace: "Marché",
     soilAdvisor: "Conseiller Sol",
+    cropRecommendation: "Cultures par région",
     contact: "Contactez-nous",
     login: "Connexion",
     logout: "Déconnexion",
